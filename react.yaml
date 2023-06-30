@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: react-app
+  name: react-nginx
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: react-app
+      app: react-nginx
   template:
     metadata:
       labels:
-        app: react-app
+        app: react-nginx
     spec:
       containers:
-      - name: react-app
+      - name: react-nginx
         image: react-nginx-tre:latest
         command: ["nginx", "-g", "daemon off;"]
         imagePullPolicy: Never
@@ -30,10 +30,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: react-app-service
+  name: react-nginx-service
 spec:
   selector:
-    app: react-app
+    app: react-nginx
   type: NodePort
   ports:
   - protocol: TCP
