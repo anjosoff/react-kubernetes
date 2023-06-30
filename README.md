@@ -22,15 +22,17 @@ IMPORTANTE :Certifique-se que você tenha todas as stacks instaladas
     ```eval $(minikube docker-env)```
     &nbsp;
     > Referência: "Local Docker images no Minikube" por [Waldemar Neto em IMasters](https://imasters.com.br/cloud/local-docker-images-no-minikube)
-3. Navegue até a pasta react-app/ onde se encontra o Dockerfile
-4. Faça o build da imagem
+3. Navegue até a pasta react-app/ onde se encontra o Dockerfile e execute:
+    ```npm run build```
+    > Vai gerar uma pasta chamada "dist" contento outra pasta "assets" e o index.html 
+4. Agora é possivel fazer o build da imagem
     ```docker build . --tag=react-app:latest --rm=true```
     &nbsp;
     > O argumento ```--rm=true``` faz com que apenas seja feito o build da imagem e o container seja removido (Veja a [documentação do Docker](https://docs.docker.com/engine/reference/commandline/rm/))
 5. Execute ```docker images```
     > Veja que agora sua imagem recém buildada está no registro local do kubernetes
  
-6. Novamente, navegue até a pasta em que se encontra ```react.yaml``` e execute o apply. Esse é o arquivo de configuração do Kubernetes(similar ao Docker-compose.yaml para o Docker)
+6. Novamente, navegue até a raiz da aplicação onde se encontra ```react.yaml``` e execute o apply. Esse é o arquivo de configuração do Kubernetes(similar ao Docker-compose.yaml para o Docker)
     ```kubectl apply -f react.yaml```
     &nbsp;
     output: ```deployment.apps/react-app created
@@ -45,3 +47,6 @@ IMPORTANTE :Certifique-se que você tenha todas as stacks instaladas
     &nbsp;
     > No gif eu mostro os logs do pod, lá mostra que o VITE esta rodando dentro do pod de forma local e na network  (o mesmo ip do pod)
     > Utilize ```kubectl get pod -o wide``` para verificar todos os pods e seus respetivos IP's.
+8. Por fim execute ``minikube service react-app-service```, sabendo que react-app-service é o nome do serviço que foi criado no YAML
+    > Com isso o minikube vai abrir uma pagina no seu navegaddor padrão com o servidor do nginx
+
