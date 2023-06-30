@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: react-app
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: react-app
@@ -13,15 +14,16 @@ spec:
     spec:
       containers:
       - name: react-app
-        image: react-application:latest
-        command: ["npx", "vite", "--host", "0.0.0.0", "--port", "8080"]
+        image: react-nginx-tre:latest
+        command: ["nginx", "-g", "daemon off;"]
         imagePullPolicy: Never
         resources:
           limits:
-            memory: "128Mi"
             cpu: "500m"
+            memory: "128Mi"
         ports:
-        - containerPort: 8080
+        - containerPort: 80
+
 
 ---
 
@@ -36,5 +38,4 @@ spec:
   ports:
   - protocol: TCP
     port: 80
-    targetPort: 8080
-    nodePort: 30000
+    targetPort: 80
