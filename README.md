@@ -47,6 +47,6 @@ IMPORTANTE :Certifique-se que você tenha todas as stacks instaladas
     &nbsp;
     > No gif eu mostro os logs do pod, lá mostra que o VITE esta rodando dentro do pod de forma local e na network  (o mesmo ip do pod)
     > Utilize ```kubectl get pod -o wide``` para verificar todos os pods e seus respetivos IP's.
-8. Por fim execute ```minikube service react-app-service```, sabendo que react-app-service é o nome do serviço que foi criado no YAML
+8. Por fim execute ```minikube service react-nginx-service```, sabendo que react-app-service é o nome do serviço que foi criado no YAML
     > Com isso o minikube vai abrir uma pagina no seu navegaddor padrão com o servidor do nginx
 
